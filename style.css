@@ -20,6 +20,8 @@ main {
   width: 375;
   background: #F4F4F4;
   border-radius: 20px;
+  margin: 0 auto;
+  padding: 44px 24px 23px;
 }
 
 
