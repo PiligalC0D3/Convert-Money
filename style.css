@@ -7,19 +7,20 @@
 }
 
 body {
-  background-color: #8a51fc;
-}
-/* 
-.orbitron-<uniquifier> {
-  font-family: "Orbitron", serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
+  background-color: #7a43e7;
 }
 
-*/
-
-
-style {
-  background-color: #8a33ff;
+.logo {
+  width: 300px;
+  display: block;
+  margin: 20px auto;
 }
+
+main {
+  width: 375;
+  background: #F4F4F4;
+  border-radius: 20px;
+}
+
+
+
