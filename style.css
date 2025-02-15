@@ -1,4 +1,14 @@
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Orbitron', sans-serif;
+}
+
+body {
+  background-color: #8a51fc;
+}
 /* 
 .orbitron-<uniquifier> {
   font-family: "Orbitron", serif;
@@ -9,10 +19,7 @@
 
 */
 
-img {
-  width: 300;
-height: 300;
-top: 271px;
-left: 954px;
 
+style {
+  background-color: #8a33ff;
 }
