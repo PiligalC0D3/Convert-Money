@@ -30,7 +30,7 @@ label {
   font-size: 14px;
 }
 
-select {
+select, input { /* Desse modo aplica-se o mesmo estilo para "select e input" */
 
   background: #FFFFFF;
   border: 1px solid;
