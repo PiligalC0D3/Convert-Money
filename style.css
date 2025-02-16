@@ -20,7 +20,7 @@ main {
   width: 375px;
   background: #F4F4F4;
   border-radius: 20px;
-  margin: 0 auto;
+  margin: 0 auto 40px;
   padding: 44px 24px 23px;
 }
 
@@ -75,4 +75,28 @@ section{
   display: flex;
   flex-direction: column;
   align-items: center;
+} 
+
+.seta-img {
+  margin-top: 19px 0;
+
+}
+
+.currency-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.currency {
+  color: #777777;
+  font-size: 14px;
+
+}
+
+.currency-value {
+  color:#555555;
+  font-weight: 700;
+  font-size: 20px;
 }
