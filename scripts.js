@@ -1,2 +1,8 @@
+const convertButton = document.querySelector(".convert-button") 
 
-console.log("Funcionou ?")
+function convertValues() {    
+    console.log("Convertendo valores")
+}
+
+convertButton.addEventListener("click", convertValues) /*Aqui é o ouvinte */
+
