@@ -12,7 +12,7 @@ function convertValues() {
     inputCurrencyValueToConvert.innerHTML = inputCurrencyValue
     
 
-    console.log(convertedValue)
+    console.log(convertedValue) 
 }
 
 convertButton.addEventListener("click", convertValues) /*Aqui é o ouvinte */
