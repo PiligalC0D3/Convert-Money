@@ -14,11 +14,16 @@ function convertValues() {
     const convertedValue = inputCurrencyValue / dolarToday 
     const convertedValueEuro = inputCurrencyValue / euroToday
 
-    currencyValueToConvert.innerHTML = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(inputCurrencyValue)
-    currencyValueConverted.innerHTML = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'USD' }).format(convertedValue)
+    if(currencySelect.value === "USD") {
+        currencyValueConverted.innerHTML = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'USD' }).format(convertedValue)
+    } else if(currencySelect.value === "EUR") {
+        currencyValueConverted.innerHTML = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'EUR' }).format(convertedValueEuro)
+    } else {                
+
+    currencyValueToConvert.innerHTML = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(inputCurrencyValue) /* esse vai sair para o if e else */
+    
     
     console.log(convertedValue) 
 }
 
 convertButton.addEventListener("click", convertValues)  /*Aqui é o ouvinte */
-
