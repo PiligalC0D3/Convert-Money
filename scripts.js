@@ -15,12 +15,23 @@ function convertValues() {
     const convertedValueEuro = inputCurrencyValue / euroToday
 
     if(currencySelect.value === "USD") {
-        currencyValueConverted.innerHTML = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'USD' }).format(convertedValue)
-    } else if(currencySelect.value === "EUR") {
-        currencyValueConverted.innerHTML = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'EUR' }).format(convertedValueEuro)
-    } else {                
-
-    currencyValueToConvert.innerHTML = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(inputCurrencyValue) /* esse vai sair para o if e else */
+        currencyValueConverted.innerHTML = new Intl.NumberFormat('pt-BR', { 
+            style: 'currency', 
+            currency: 'USD' 
+        }).format(inputCurrencyValue / dolarToday)
+    } 
+    
+    if(currencySelect.value === "EUR") {
+        currencyValueConverted.innerHTML = new Intl.NumberFormat('pt-BR', { 
+            style: 'currency', 
+            currency: 'EUR' 
+        }).format(inputCurrencyValue / euroToday)
+    } 
+    else {                
+    currencyValueToConvert.innerHTML = new Intl.NumberFormat('pt-BR', { 
+        style: 'currency', 
+        currency: 'BRL' 
+    }).format(inputCurrencyValue) /* esse vai sair para o if e else <-----------*/
     
     
     console.log(convertedValue) 
