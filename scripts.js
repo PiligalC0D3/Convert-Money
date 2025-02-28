@@ -7,34 +7,34 @@ function convertValues() {
     const currencyValueConverted = document.querySelector(".currency-value") /* Outras moedas */
 
 
-    console.log(currencySelect.value) /* Mostra o valor da moeda selecionada */
+   
+    /* Mostra o valor da moeda selecionada */
+
     const dolarToday = 5.75
     const euroToday = 6.75
 
-    const convertedValue = inputCurrencyValue / dolarToday 
-    const convertedValueEuro = inputCurrencyValue / euroToday
 
-    if(currencySelect.value === "USD") {
-        currencyValueConverted.innerHTML = new Intl.NumberFormat('pt-BR', { 
+    if(currencySelect.value === "dolar") {
+        currencyValueConverted.innerHTML = new Intl.NumberFormat('en-US', { 
             style: 'currency', 
             currency: 'USD' 
         }).format(inputCurrencyValue / dolarToday)
     } 
     
-    if(currencySelect.value === "EUR") {
-        currencyValueConverted.innerHTML = new Intl.NumberFormat('pt-BR', { 
+    if(currencySelect.value === "euro") {
+        currencyValueConverted.innerHTML = new Intl.NumberFormat('de-DE', { 
             style: 'currency', 
             currency: 'EUR' 
         }).format(inputCurrencyValue / euroToday)
     } 
-    else {                
+                   
     currencyValueToConvert.innerHTML = new Intl.NumberFormat('pt-BR', { 
         style: 'currency', 
         currency: 'BRL' 
     }).format(inputCurrencyValue) /* esse vai sair para o if e else <-----------*/
     
     
-    console.log(convertedValue) 
+    console.log(inputCurrencyValue) 
 }
 
 convertButton.addEventListener("click", convertValues)  /*Aqui é o ouvinte */
