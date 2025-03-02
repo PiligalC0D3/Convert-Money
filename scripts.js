@@ -14,21 +14,21 @@ function convertValues() {
     const euroToday = 6.75
 
 
-    if(currencySelect.value === "dolar") {
+    if(currencySelect.value == "dolar") {
         currencyValueConverted.innerHTML = new Intl.NumberFormat('en-US', { 
             style: 'currency', 
             currency: 'USD' 
         }).format(inputCurrencyValue / dolarToday)
     } 
     
-    if(currencySelect.value === "euro") {
+    if(currencySelect.value == "euro") {
         currencyValueConverted.innerHTML = new Intl.NumberFormat('de-DE', { 
             style: 'currency', 
             currency: 'EUR' 
         }).format(inputCurrencyValue / euroToday)
     } 
                    
-    currencyValueToConvert.innerHTML = new Intl.NumberFormat('pt-BR', { 
+    else currencyValueToConvert.innerHTML = new Intl.NumberFormat('pt-BR', { 
         style: 'currency', 
         currency: 'BRL' 
     }).format(inputCurrencyValue) /* esse vai sair para o if e else <-----------*/
