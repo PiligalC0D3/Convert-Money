@@ -40,4 +40,9 @@ function convertValues() {
     console.log("Valor digitado:", inputCurrencyValue);
 }
 
+function changeCurrency() {
+    console.log("trocou de moeda:");
+}
+
+currencySelect.addEventListener("change", changeCurrency );
 convertButton.addEventListener("click", convertValues);
