@@ -41,7 +41,12 @@ function convertValues() {
 }
 
 function changeCurrency() {
-    console.log("trocou de moeda:");
+    const currencyName = document.getElementById("currency-name");
+    const currencyImg = document.querySelector("currency-img");
+
+    currencyName.innerHTML = currencySelect.value === "dolar" ? "Dólar" : currencySelect.value === "euro" ? "Euro" : "Real";
+    currencyImg.src = currencySelect.value === "dolar" ? "assets/dolar.png" : currencySelect.value === "euro" ? "assets/euro.png" : "assets/real.png";
+    
 }
 
 currencySelect.addEventListener("change", changeCurrency );
