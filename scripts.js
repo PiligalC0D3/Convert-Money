@@ -41,13 +41,26 @@ function convertValues() {
 }
 
 function changeCurrency() {
-    const currencyName = document.getElementById("currency-name");
-    const currencyImg = document.querySelector("currency-img");
+    // Obtém os elementos do HTML
+const currencySelect = document.getElementById("currency-select");
 
-    currencyName.innerHTML = currencySelect.value === "dolar" ? "Dólar" : currencySelect.value === "euro" ? "Euro" : "Real";
-    currencyImg.src = currencySelect.value === "dolar" ? "assets/dolar.png" : currencySelect.value === "euro" ? "assets/euro.png" : "assets/real.png";
-    
+function changeCurrency() {
+    const currencyName = document.getElementById("currency-name");
+    const currencyImg = document.getElementById("currency-img"); // Corrigido
+
+    // Atualiza o nome da moeda
+    if (currencySelect.value === "dolar") {
+        currencyName.innerHTML = "Dólar";
+        currencyImg.src = "assets/eua.png";
+    } else if (currencySelect.value === "euro") {
+        currencyName.innerHTML = "Euro";
+        currencyImg.src = "assets/euro.png";
+    } else {
+        currencyName.innerHTML = "Real";
+        currencyImg.src = "assets/real.png";
+    }
 }
 
-currencySelect.addEventListener("change", changeCurrency );
+// Adiciona os eventos
+currencySelect.addEventListener("change", changeCurrency);
 convertButton.addEventListener("click", convertValues);
