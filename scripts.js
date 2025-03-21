@@ -42,9 +42,16 @@ function convertValues() {
 
 /*RECOMEÇANDO PARA CORREÇÃO*/
 function changeCurrency() {
- console.log("Moeda selecionada:");   
+ const currencyNmae = document.qetElementById("currency-name");
+
+ if(currencySelect.value === "dolar"){
+     currencyNmae.innerHTML = "Dólar";
+
+ 
+
 }
 // Adiciona os eventos
 currencySelect.addEventListener("change", changeCurrency);
 convertButton.addEventListener("click", convertValues);
 
+}
