@@ -2,19 +2,21 @@ const convertButton = document.querySelector(".convert-button");
 const currencySelect = document.querySelector(".currency-select");   
 
 function convertValues() {
-    const inputCurrencyValue = Number(document.querySelector(".input-currency").value); // Valor digitado pelo usuário
-    if (isNaN(inputCurrencyValue) || inputCurrencyValue <= 0) { // Verifica se o valor digitado é um número válido
-        alert("Por favor, insira um valor válido."); // Exibe um alerta caso o valor seja inválido
-        return; // Impede a execução do restante da função se o valor for inválido
+    const inputCurrencyValue = Number(document.querySelector(".input-currency").value);
+
+    if (isNaN(inputCurrencyValue) || inputCurrencyValue <= 0) {
+        alert("Por favor, insira um valor válido.");
+        return;
     }
 
-    const currencyValueToConvert = document.querySelector(".currency-value-to-convert"); // Elemento que exibe o valor digitado
-    const currencyValueConverted = document.querySelector(".currency-value"); // Elemento que exibe o valor convertido
- 
+    const currencyValueToConvert = document.querySelector(".currency-value-to-convert");
+    const currencyValueConverted = document.querySelector(".currency-value");
+
+
     const dolarToday = 5.75;
     const euroToday = 6.75;
 
-    currencyValueToConvert.innerHTML = new Intl.NumberFormat('pt-BR', { // Formata o valor digitado para a moeda selecionada
+    currencyValueToConvert.innerHTML = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL'
     }).format(inputCurrencyValue);
@@ -24,17 +26,20 @@ function convertValues() {
             style: 'currency',
             currency: 'USD'
         }).format(inputCurrencyValue / dolarToday);
+        
     } else if (currencySelect.value === "euro") {
         currencyValueConverted.innerHTML = new Intl.NumberFormat('de-DE', {
             style: 'currency',
             currency: 'EUR'
         }).format(inputCurrencyValue / euroToday);
+
     } else if (currencySelect.value === "real") {
         currencyValueConverted.innerHTML = new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL'
         }).format(inputCurrencyValue);
-    } else { // Caso a moeda selecionada não seja válida
+
+    } else {
         currencyValueConverted.innerHTML = "Selecione uma moeda válida";
     }
 
@@ -42,23 +47,35 @@ function convertValues() {
     console.log("Valor digitado:", inputCurrencyValue);
 }
 
-function changeCurrency() { // Função para alterar o nome da moeda na tela
-    const currencyName = document.getElementById("currency-name"); // Elemento que exibe o nome da moeda
-    const currencyImage = document.gerySelector("currency-img"); // Elemento que exibe a imagem da moeda
+function changeCurrency() {
+    const currencyName = document.getElementById("currency-name");
+    const currencyImage = document.querySelector(".currency-img");
 
     if (currencySelect.value === "dolar") {
         currencyName.innerHTML = "Dólar americano";
-        currencyImage.src = "./assets/eua.png";
+        currencyImage.src = "assets/eua.png";
 
     } else if (currencySelect.value === "euro") {
         currencyName.innerHTML = "Euro";
-        currencyImage.src = "./assets/euro.png";
+        currencyImage.src = "assets/euro.png";
 
     } else if (currencySelect.value === "real") {
         currencyName.innerHTML = "Real Brasileiro";
-        currencyImage.src = "./assets/real.png";
+        currencyImage.src = "assets/brasil.png";
     }
 }
+
+// Permitir conversão ao pressionar Enter
+document.querySelector(".input-currency").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        convertValues();
+    }
+});
+
+// Impedir entrada de caracteres inválidos no campo de valor
+document.querySelector(".input-currency").addEventListener("input", function(event) {
+    this.value = this.value.replace(/[^0-9.,]/g, ""); // Permite apenas números, ponto e vírgula
+});
 
 currencySelect.addEventListener("change", changeCurrency);
 convertButton.addEventListener("click", convertValues);
