@@ -39,7 +39,7 @@ function convertValues() {
             currency: 'BRL'
         }).format(inputCurrencyValue);
 
-    } else {
+    } else {         
         currencyValueConverted.innerHTML = "Selecione uma moeda válida";
     }
 
@@ -50,11 +50,12 @@ function convertValues() {
 function changeCurrency() {
     const currencyName = document.getElementById("currency-name");
     const currencyImage = document.querySelector(".currency-img");
-    const currencyValue = document.querySelector("currency-value");
+    
 
     if (currencySelect.value === "dolar") {
         currencyName.innerHTML = "Dólar americano";
         currencyImage.src = "assets/eua.png";
+        
 
     } else if (currencySelect.value === "euro") {
         currencyName.innerHTML = "Euro";
@@ -69,6 +70,8 @@ function changeCurrency() {
 // Permitir conversão ao pressionar Enter
 document.querySelector(".input-currency").addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
+
+
         convertValues();
     }
 });
