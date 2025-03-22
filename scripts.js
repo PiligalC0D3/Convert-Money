@@ -26,7 +26,7 @@ function convertValues() {
             style: 'currency',
             currency: 'USD'
         }).format(inputCurrencyValue / dolarToday);
-        
+
     } else if (currencySelect.value === "euro") {
         currencyValueConverted.innerHTML = new Intl.NumberFormat('de-DE', {
             style: 'currency',
@@ -43,13 +43,14 @@ function convertValues() {
         currencyValueConverted.innerHTML = "Selecione uma moeda válida";
     }
 
-    console.log("Moeda selecionada:", currencySelect.value);
+    console.log("Moeda selecionada:", currencySelect.value);   
     console.log("Valor digitado:", inputCurrencyValue);
 }
 
 function changeCurrency() {
     const currencyName = document.getElementById("currency-name");
     const currencyImage = document.querySelector(".currency-img");
+    const currencyValue = document.querySelector("currency-value");
 
     if (currencySelect.value === "dolar") {
         currencyName.innerHTML = "Dólar americano";
@@ -79,3 +80,7 @@ document.querySelector(".input-currency").addEventListener("input", function(eve
 
 currencySelect.addEventListener("change", changeCurrency);
 convertButton.addEventListener("click", convertValues);
+
+
+
+
