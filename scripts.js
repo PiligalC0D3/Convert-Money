@@ -13,7 +13,10 @@ const currencyImage1 = document.querySelector(".currency-img1"); // Corrigido pa
 const exchangeRates = {
     dolar: { rate: 5.75, locale: "en-US", currency: "USD", name: "Dólar Americano", img: "assets/eua.png" },
     euro: { rate: 6.75, locale: "de-DE", currency: "EUR", name: "Euro", img: "assets/euro.png" },
-    real: { rate: 1, locale: "pt-BR", currency: "BRL", name: "Real Brasileiro", img: "assets/brasil.png" }
+    real: { rate: 1, locale: "pt-BR", currency: "BRL", name: "Real Brasileiro", img: "assets/brasil.png" },
+    libra: { rate: 7.39, locale: "en-GB", currency: "GBP", name: "Libra Esterlina", img: "assets/libra.png" },
+    bitcoin: { rate: 84988.9, locale: "en-US", currency: "BTC", name: "Bitcoin", img: "assets/bitcoin.png" }
+
 };
 
 function convertValues() {
