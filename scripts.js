@@ -1,89 +1,98 @@
-const convertButton = document.querySelector(".convert-button"); 
-const currencySelect = document.querySelector(".currency-select");   
+const convertButton = document.querySelector(".convert-button");
+const currencySelect = document.querySelector(".currency-select");
+const currencySelectDe = document.querySelector(".currency-select-de");
+const inputCurrency = document.querySelector(".input-currency");
+const currencyValueToConvert = document.querySelector(".currency-value-to-convert");
+const currencyValueConverted = document.querySelector(".currency-value");
+const currencyName = document.getElementById("currency-name");
+const currencyImage = document.querySelector(".currency-img");
+const currencyName1 = document.getElementById("currency-name1");
+const currencyImage1 = document.querySelector(".currency-img1"); // Corrigido para suportar segunda imagem
+
+// Taxas de câmbio simuladas (poderiam vir de uma API no futuro)
+const exchangeRates = {
+    dolar: { rate: 5.75, locale: "en-US", currency: "USD", name: "Dólar Americano", img: "assets/eua.png" },
+    euro: { rate: 6.75, locale: "de-DE", currency: "EUR", name: "Euro", img: "assets/euro.png" },
+    real: { rate: 1, locale: "pt-BR", currency: "BRL", name: "Real Brasileiro", img: "assets/brasil.png" }
+};
 
 function convertValues() {
-    const inputCurrencyValue = Number(document.querySelector(".input-currency").value);
+    const inputCurrencyValue = parseFloat(inputCurrency.value.replace(",", "."));
 
     if (isNaN(inputCurrencyValue) || inputCurrencyValue <= 0) {
-        alert("Por favor, insira um valor válido.");
+        currencyValueToConvert.innerHTML = "R$ 0,00";
+        currencyValueConverted.innerHTML = "Selecione um valor válido";
         return;
     }
 
-    const currencyValueToConvert = document.querySelector(".currency-value-to-convert");
-    const currencyValueConverted = document.querySelector(".currency-value");
+    const selectedCurrencyDe = currencySelectDe.value;
+    const selectedCurrencyTo = currencySelect.value;
+    const exchangeFrom = exchangeRates[selectedCurrencyDe];
+    const exchangeTo = exchangeRates[selectedCurrencyTo];
 
-
-    const dolarToday = 5.75;
-    const euroToday = 6.75;
-
-    currencyValueToConvert.innerHTML = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-    }).format(inputCurrencyValue);
-
-    if (currencySelect.value === "dolar") {
-        currencyValueConverted.innerHTML = new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD'
-        }).format(inputCurrencyValue / dolarToday);
-
-    } else if (currencySelect.value === "euro") {
-        currencyValueConverted.innerHTML = new Intl.NumberFormat('de-DE', {
-            style: 'currency',
-            currency: 'EUR'
-        }).format(inputCurrencyValue / euroToday);
-
-    } else if (currencySelect.value === "real") {
-        currencyValueConverted.innerHTML = new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        }).format(inputCurrencyValue);
-
-    } else {         
+    if (!exchangeFrom || !exchangeTo) {
         currencyValueConverted.innerHTML = "Selecione uma moeda válida";
+        return;
     }
 
-    console.log("Moeda selecionada:", currencySelect.value);   
-    console.log("Valor digitado:", inputCurrencyValue);
+    // Exibe o valor original na moeda de origem
+    currencyValueToConvert.innerHTML = new Intl.NumberFormat(exchangeFrom.locale, {
+        style: "currency",
+        currency: exchangeFrom.currency
+    }).format(inputCurrencyValue);
+
+    // Converter para BRL primeiro, depois para a moeda de destino
+    const valueInBRL = inputCurrencyValue * exchangeFrom.rate;
+    const convertedValue = valueInBRL / exchangeTo.rate;
+
+    currencyValueConverted.innerHTML = new Intl.NumberFormat(exchangeTo.locale, {
+        style: "currency",
+        currency: exchangeTo.currency
+    }).format(convertedValue);
 }
 
 function changeCurrency() {
-    const currencyName = document.getElementById("currency-name");
-    const currencyImage = document.querySelector(".currency-img");
-    
+    const selectedCurrency = currencySelect.value;
+    const exchangeData = exchangeRates[selectedCurrency];
 
-    if (currencySelect.value === "dolar") {
-        currencyName.innerHTML = "Dólar americano";
-        currencyImage.src = "assets/eua.png";
-        
-
-    } else if (currencySelect.value === "euro") {
-        currencyName.innerHTML = "Euro";
-        currencyImage.src = "assets/euro.png";
-
-    } else if (currencySelect.value === "real") {
-        currencyName.innerHTML = "Real Brasileiro";
-        currencyImage.src = "assets/brasil.png";
+    if (exchangeData) {
+        currencyName.innerHTML = exchangeData.name;
+        currencyImage.src = exchangeData.img;
     }
+
+    // Atualiza o valor convertido ao mudar a moeda
+    convertValues();
+}
+
+function changeCurrencyDe() {
+    const selectedCurrency = currencySelectDe.value;
+    const exchangeData = exchangeRates[selectedCurrency];
+
+    if (exchangeData) {
+        currencyName1.innerHTML = exchangeData.name;
+        currencyImage1.src = exchangeData.img;
+    }
+
+    // Atualiza o valor convertido ao mudar a moeda de origem
+    convertValues();
 }
 
 // Permitir conversão ao pressionar Enter
-document.querySelector(".input-currency").addEventListener("keypress", function(event) {
+inputCurrency.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
-
-
         convertValues();
     }
 });
 
 // Impedir entrada de caracteres inválidos no campo de valor
-document.querySelector(".input-currency").addEventListener("input", function(event) {
-    this.value = this.value.replace(/[^0-9.,]/g, ""); // Permite apenas números, ponto e vírgula
+inputCurrency.addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9.,]/g, "").replace(/[,\.](?=.*[,\.])/g, ""); // Permite apenas um ponto ou vírgula como separador decimal
 });
 
+// Atualiza a conversão automaticamente ao mudar as moedas
 currencySelect.addEventListener("change", changeCurrency);
+currencySelectDe.addEventListener("change", changeCurrencyDe);
 convertButton.addEventListener("click", convertValues);
 
-
-
-
+// Converte automaticamente ao digitar um valor
+inputCurrency.addEventListener("input", convertValues);
