@@ -19,7 +19,10 @@ const exchangeRates = {
 
 };
 
-function convertValues() {
+async function fetchExchangeRates() {
+}
+
+function data() {
     const inputCurrencyValue = parseFloat(inputCurrency.value.replace(",", "."));
 
     if (isNaN(inputCurrencyValue) || inputCurrencyValue <= 0) {
@@ -32,6 +35,10 @@ function convertValues() {
     const selectedCurrencyTo = currencySelect.value;
     const exchangeFrom = exchangeRates[selectedCurrencyDe];
     const exchangeTo = exchangeRates[selectedCurrencyTo];
+
+    //async await para buscar as taxas de câmbio atualizadas
+    const data = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,GBP-BRL,BTC-BRL").then(response => response.json()) // Fetch atualizado para múltiplas moedas
+    console.log(data)
 
     if (!exchangeFrom || !exchangeTo) {
         currencyValueConverted.innerHTML = "Selecione uma moeda válida";
