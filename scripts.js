@@ -7,7 +7,7 @@ const currencyValueConverted = document.querySelector(".currency-value");
 const currencyName = document.getElementById("currency-name");
 const currencyImage = document.querySelector(".currency-img");
 const currencyName1 = document.getElementById("currency-name1");
-const currencyImage1 = document.querySelector(".currency-img1"); // Corrigido para suportar segunda imagem
+const currencyImage1 = document.querySelector(".currency-img1");
 
 // Taxas de câmbio simuladas (poderiam vir de uma API no futuro)
 const exchangeRates = {
@@ -16,9 +16,7 @@ const exchangeRates = {
     real: { rate: 1, locale: "pt-BR", currency: "BRL", name: "Real Brasileiro", img: "assets/brasil.png" },
     libra: { rate: 7.39, locale: "en-GB", currency: "GBP", name: "Libra Esterlina", img: "assets/libra.png" },
     bitcoin: { rate: 84988.9, locale: "en-US", currency: "BTC", name: "Bitcoin", img: "assets/bitcoin.png" }
-
 };
-
 
 function convertValues() {
     const inputCurrencyValue = parseFloat(inputCurrency.value.replace(",", "."));
@@ -29,12 +27,10 @@ function convertValues() {
         return;
     }
 
-
     const selectedCurrencyDe = currencySelectDe.value;
     const selectedCurrencyTo = currencySelect.value;
     const exchangeFrom = exchangeRates[selectedCurrencyDe];
     const exchangeTo = exchangeRates[selectedCurrencyTo];
-}
 
     if (!exchangeFrom || !exchangeTo) {
         currencyValueConverted.innerHTML = "Selecione uma moeda válida";
@@ -55,7 +51,7 @@ function convertValues() {
         style: "currency",
         currency: exchangeTo.currency
     }).format(convertedValue);
-
+}
 
 function changeCurrency() {
     const selectedCurrency = currencySelect.value;
@@ -66,7 +62,6 @@ function changeCurrency() {
         currencyImage.src = exchangeData.img;
     }
 
-    // Atualiza o valor convertido ao mudar a moeda
     convertValues();
 }
 
@@ -79,7 +74,6 @@ function changeCurrencyDe() {
         currencyImage1.src = exchangeData.img;
     }
 
-    // Atualiza o valor convertido ao mudar a moeda de origem
     convertValues();
 }
 
@@ -92,13 +86,11 @@ inputCurrency.addEventListener("keypress", function (event) {
 
 // Impedir entrada de caracteres inválidos no campo de valor
 inputCurrency.addEventListener("input", function () {
-    this.value = this.value.replace(/[^0-9.,]/g, "").replace(/[,\.](?=.*[,\.])/g, ""); // Permite apenas um ponto ou vírgula como separador decimal
+    this.value = this.value.replace(/[^0-9.,]/g, "").replace(/[,\.](?=.*[,\.])/g, "");
 });
 
 // Atualiza a conversão automaticamente ao mudar as moedas
 currencySelect.addEventListener("change", changeCurrency);
 currencySelectDe.addEventListener("change", changeCurrencyDe);
 convertButton.addEventListener("click", convertValues);
-
-// Converte automaticamente ao digitar um valor
 inputCurrency.addEventListener("input", convertValues);
