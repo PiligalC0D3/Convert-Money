@@ -18,7 +18,7 @@ const exchangeRates = {
     bitcoin: { rate: 84988.9, locale: "en-US", currency: "BTC", name: "Bitcoin", img: "assets/bitcoin.png" }
 };
 
-function convertValues() {
+const convertValues = async ()=> {
     const inputCurrencyValue = parseFloat(inputCurrency.value.replace(",", "."));
 
     if (isNaN(inputCurrencyValue) || inputCurrencyValue <= 0) {
@@ -31,6 +31,16 @@ function convertValues() {
     const selectedCurrencyTo = currencySelect.value;
     const exchangeFrom = exchangeRates[selectedCurrencyDe];
     const exchangeTo = exchangeRates[selectedCurrencyTo];
+
+    const data = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,GBP-BRL,BTC-BRL").then(response => response.json())
+    const dolar = data.USDBRL.high
+    const euro = data.EURBRL.high
+    const libra = data.GBPBRL.high
+    const bitcoin = data.BTCBRL.high
+    exchangeRates.dolar.rate = parseFloat(dolar)
+    exchangeRates.euro.rate = parseFloat(euro)
+    exchangeRates.libra.rate = parseFloat(libra)
+    exchangeRates.bitcoin.rate = parseFloat(bitcoin)
 
     if (!exchangeFrom || !exchangeTo) {
         currencyValueConverted.innerHTML = "Selecione uma moeda válida";
